@@ -1,4 +1,5 @@
 const fs = require('fs');
+const inquirer = require('inquirer');
 const path = require('path');
 const htmlHelpers = require('./src/utils/html');
 let employees = [
@@ -17,7 +18,7 @@ let employees = [
 ];
 
 
-// var prompt = function(question){
+// function prompt(question){
 //   return inquirer
 //     .prompt(question)
 //     .then(function(answers){
@@ -32,15 +33,13 @@ let employees = [
 // }
 
 const teamQuestion = {
-                        type: 'list',
-                        name: 'team',
-                        message: 'Please add members to your team',
-                        choices: ['Engineer', 'Intern', 'Finished building my team'],
-                    }
+    type: 'list',
+    name: 'team',
+    message: 'What employees would you like to add to you team?',
+    choices: ['Engineer', 'Intern', 'Finished building my team'],
+}
 
-// inquirer 
-inquirer
-  .prompt([
+const managerQuestions = [
     {
         type: 'input',
         message: 'Please enter the team managers name?',
@@ -62,24 +61,78 @@ inquirer
         name: 'managerOffice',
     },
     teamQuestion
-   
-  ])
-  .then((response) => {
+]
 
+const engineerQuestions =[
+    {
+        type: 'input',
+        message: 'Please enter the engineers name?',
+        name: 'name',
+    },
+    {
+        type: 'input',
+        message: 'Please enter the engineers employee ID?',
+        name: 'ID',
+    },
+    {
+        type: 'input',
+        message: 'Please enter the engineers email?',
+        name: 'email',
+    },
+    {
+        type: 'input',
+        message: 'Please enter the engineers Github?',
+        name: 'Github',
+    },
+    teamQuestion
+]
+
+const internQuestions =[
+    {
+        type: 'input',
+        message: 'Please enter the interns name?',
+        name: 'name',
+    },
+    {
+        type: 'input',
+        message: 'Please enter the interns employee ID?',
+        name: 'ID',
+    },
+    {
+        type: 'input',
+        message: 'Please enter the interns email?',
+        name: 'email',
+    },
+    {
+        type: 'input',
+        message: 'Please enter the interns school of study?',
+        name: 'school',
+    },
+    teamQuestion
+]
+
+// inquirer 
+function promptQuestions(questions){
+    return inquirer
+  .prompt(questions)
+  .then((response) => {
+    // new employee(response)
     switch (response.team) {
         case 'Engineer':
-            return
+            promptQuestions(engineerQuestions)
+            break;
         case 'Intern':
-            return
+            promptQuestions(internQuestions)
+            break;
         case 'Finished building my team':
             return
         default:
             return
     }
-    
-    fs.writeFile("README.MD", getTemplate(response), (err) =>
-    err ? console.error(err) : console.log('Success!'))
     });
+}
+
+promptQuestions(managerQuestions)
 
 // keep asking the user to enter which employee type
 
