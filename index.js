@@ -183,10 +183,26 @@ function addCards(team){
     for (const objClass of team) {
         const htmlPath = path.join(__dirname, "src", "html-templates", "card.html");
         const layout = fs.readFileSync(htmlPath, "utf-8");
-        const newHTML = htmlHelpers.injectCode(layout, '{{ name }}', objClass.getName());
+        let newHTML = htmlHelpers.injectCode(layout, '{{ name }}', objClass.getName());
         newHTML = htmlHelpers.injectCode(newHTML, '{{ role }}', objClass.getRole());
         newHTML = htmlHelpers.injectCode(newHTML, '{{ id }}', objClass.getID());
         newHTML = htmlHelpers.injectCode(newHTML, '{{ email }}', objClass.getEmail());
+
+        switch (objClass.getRole()){
+            case 'Manager':
+                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', objClass.getOffice());
+                break;
+            case 'Engineer':
+                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', objClass.getGithub());
+                break;
+            case 'Intern':
+                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', objClass.getSchool());
+                break;
+            default: 
+                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', '');
+                break;
+
+        }
 
         fs.appendFile('cards.html', newHTML, function (err) {
             if (err) throw err;
