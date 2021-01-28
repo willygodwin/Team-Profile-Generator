@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const path = require('path');
 const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
-const Engineer = require('./lib/Engineer');
+const Engineer = require('./lib/engineer');
 const htmlHelpers = require('./src/utils/html');
 // let employees = [
 //     {
