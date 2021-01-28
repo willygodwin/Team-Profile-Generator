@@ -1,0 +1,29 @@
+
+
+body{ 
+    font-family:  'Open Sans', 'Helvetica Neue', sans-serif
+}
+section {
+    background-color: aliceblue;
+    padding: 10px;
+}
+h1{
+    text-align: center;
+    
+}
+
+.card-header{
+    background-color: aliceblue;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    
+}
+.card{
+    margin: 20px;
+    
+   
+
+}

@@ -5,129 +5,7 @@ const Intern = require('./lib/intern');
 const Manager = require('./lib/manager');
 const Engineer = require('./lib/engineer');
 const htmlHelpers = require('./src/utils/html');
-// let employees = [
-//     {
-//         type: "Manager",
-//         roomId: "12-A",
-//         name: "Sam",
-//         email: "sam@sam.com",
-//     },
-//     {
-//         type: "Engineer",
-//         github: "sam-ngu",
-//         name: "Sam",
-//         email: "sam@sam.com",
-//     },
-// ];
 
-
-// function prompt(question){
-//   return inquirer
-//     .prompt(question)
-//     .then(function(answers){
-//         if (condition === true){
-//           //loop back to first prompt again
-//           return prompt('question 1 data');
-//         }else{
-//           //ask second prompt
-//           return prompt('question 2 data');
-//         }
-//     });
-// }
-
-const teamQuestion = {
-    type: 'list',
-    name: 'team',
-    message: 'What employees would you like to add to you team?',
-    choices: ['Engineer', 'Intern', 'Finished building my team'],
-}
-
-const managerQuestions = [
-    {
-        type: 'confirm',
-        message: 'Are you a manager?',
-        name: 'isManager',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the team managers name?',
-        name: 'name',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the team managers employee ID?',
-        name: 'id',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the team managers email?',
-        name: 'email',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the team managers office number?',
-        name: 'office',
-    },
-    teamQuestion
-]
-
-const engineerQuestions =[
-    {
-        type: 'confirm',
-        message: 'Are you entering details for an engineer?',
-        name: 'isEngineer',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the engineers name?',
-        name: 'name',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the engineers employee ID?',
-        name: 'id',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the engineers email?',
-        name: 'email',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the engineers Github?',
-        name: 'github',
-    },
-    teamQuestion
-]
-
-const internQuestions =[
-    {
-        type: 'confirm',
-        message: 'Are you entering details for an intern?',
-        name: 'isIntern',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the interns name?',
-        name: 'name',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the interns employee ID?',
-        name: 'ID',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the interns email?',
-        name: 'email',
-    },
-    {
-        type: 'input',
-        message: 'Please enter the interns school of study?',
-        name: 'school',
-    },
-    teamQuestion
-]
 
 const myTeam = [];
 
@@ -150,10 +28,10 @@ function promptQuestions(questions){
 
     switch (response.team) {
         case 'Engineer':
-            promptQuestions(engineerQuestions)
+            promptQuestions(htmlHelpers.engineerQuestions)
             break;
         case 'Intern':
-            promptQuestions(internQuestions)
+            promptQuestions(htmlHelpers.internQuestions)
             break;
         case 'Finished building my team':
             console.log(myTeam);
@@ -170,7 +48,7 @@ function promptQuestions(questions){
 
 }
 
-promptQuestions(managerQuestions)
+promptQuestions(htmlHelpers.managerQuestions)
 
 
 // keep asking the user to enter which employee type
@@ -194,7 +72,7 @@ function addCards(team){
                 newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', `Office: ${objClass.getOffice()}`);
                 break;
             case 'Engineer':
-                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', `Github: ${objClass.getGithub()}`);
+                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', `Github: <a href = "https://github.com/${objClass.getGithub()}">${objClass.getGithub()}</a>`);
                 break;
             case 'Intern':
                 newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', `School: ${objClass.getSchool()}`);
