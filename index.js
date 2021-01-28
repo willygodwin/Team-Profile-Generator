@@ -1,6 +1,8 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 const path = require('path');
+const Intern = require('./lib/intern');
+const Manager = require('./lib/manager');
 const htmlHelpers = require('./src/utils/html');
 let employees = [
     {
@@ -41,29 +43,39 @@ const teamQuestion = {
 
 const managerQuestions = [
     {
+        type: 'confirm',
+        message: 'Are you a manager?',
+        name: 'isManager',
+    },
+    {
         type: 'input',
         message: 'Please enter the team managers name?',
-        name: 'manager',
+        name: 'name',
     },
     {
         type: 'input',
         message: 'Please enter the team managers employee ID?',
-        name: 'managerID',
+        name: 'id',
     },
     {
         type: 'input',
         message: 'Please enter the team managers email?',
-        name: 'managerEmail',
+        name: 'email',
     },
     {
         type: 'input',
         message: 'Please enter the team managers office number?',
-        name: 'managerOffice',
+        name: 'office',
     },
     teamQuestion
 ]
 
 const engineerQuestions =[
+    {
+        type: 'confirm',
+        message: 'Are you entering details for an engineer?',
+        name: 'isEngineer',
+    },
     {
         type: 'input',
         message: 'Please enter the engineers name?',
@@ -72,7 +84,7 @@ const engineerQuestions =[
     {
         type: 'input',
         message: 'Please enter the engineers employee ID?',
-        name: 'ID',
+        name: 'id',
     },
     {
         type: 'input',
@@ -82,12 +94,17 @@ const engineerQuestions =[
     {
         type: 'input',
         message: 'Please enter the engineers Github?',
-        name: 'Github',
+        name: 'github',
     },
     teamQuestion
 ]
 
 const internQuestions =[
+    {
+        type: 'confirm',
+        message: 'Are you entering details for an intern?',
+        name: 'isIntern',
+    },
     {
         type: 'input',
         message: 'Please enter the interns name?',
@@ -111,12 +128,25 @@ const internQuestions =[
     teamQuestion
 ]
 
+const myTeam = [];
+
 // inquirer 
 function promptQuestions(questions){
     return inquirer
   .prompt(questions)
   .then((response) => {
     // new employee(response)
+    if(response.isManager){
+        let manager = new Manager(response.name, response.email, response.id, response.office);
+        myTeam.push(manager);
+    } else if (isEngineer){
+        let engineer = new Engineer(response.name, response.email, response.id, response.github);
+        myTeam.push(engineer);
+    } else if (isIntern){
+        let intern = new Intern(response.name, response.email, response.id, response.school);
+        myTeam.push(intern);
+    }
+
     switch (response.team) {
         case 'Engineer':
             promptQuestions(engineerQuestions)
@@ -133,6 +163,7 @@ function promptQuestions(questions){
 }
 
 promptQuestions(managerQuestions)
+console.log(myTeam);
 
 // keep asking the user to enter which employee type
 
