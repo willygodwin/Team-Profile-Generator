@@ -1,11 +1,19 @@
-<div class="card">
-    <div class="card-title">{{ name }} <span>{{ role }}</span></div>
-    <div class="card-body">
-        <ul>
-            <li>{{ id }}</li>
-            <li>{{ email }}</li>
-            <li>{{ other }}</li>
-        </ul>
+
+<div class="col-3">
+    <div class="card">
+        
+        <div class="card-body">
+            <h4 class="card-title">{{ name }}</h4>
+            <h6 class="card-subtitle mb-2 text-muted">{{ role }}</h6>
+            <div class="card-text">
+                <ul>
+                    <li>ID: {{ id }}</li>
+                    <li>Email: <a href = "mailto: {{ email }}">{{ email }}</a></li>
+                    <li>{{ other }}</li>
+                </ul>
+            </div>
+            
+        </div>
+        
     </div>
-    
 </div>

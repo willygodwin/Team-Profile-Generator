@@ -178,7 +178,7 @@ promptQuestions(managerQuestions)
 // ask question specific to emmployee type
 // ;
 function addCards(team){
-    fs.writeFile("cards.html", '', (err) =>
+    fs.writeFile("cards.txt", '', (err) =>
         err ? console.log(err) : console.log('Success!'))
     for (const objClass of team) {
         const htmlPath = path.join(__dirname, "src", "html-templates", "card.html");
@@ -187,16 +187,17 @@ function addCards(team){
         newHTML = htmlHelpers.injectCode(newHTML, '{{ role }}', objClass.getRole());
         newHTML = htmlHelpers.injectCode(newHTML, '{{ id }}', objClass.getID());
         newHTML = htmlHelpers.injectCode(newHTML, '{{ email }}', objClass.getEmail());
+        newHTML = htmlHelpers.injectCode(newHTML, '{{ email }}', objClass.getEmail());
 
         switch (objClass.getRole()){
             case 'Manager':
-                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', objClass.getOffice());
+                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', `Office: ${objClass.getOffice()}`);
                 break;
             case 'Engineer':
-                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', objClass.getGithub());
+                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', `Github: ${objClass.getGithub()}`);
                 break;
             case 'Intern':
-                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', objClass.getSchool());
+                newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', `School: ${objClass.getSchool()}`);
                 break;
             default: 
                 newHTML = htmlHelpers.injectCode(newHTML, '{{ other }}', '');
@@ -204,7 +205,7 @@ function addCards(team){
 
         }
 
-        fs.appendFile('cards.html', newHTML, function (err) {
+        fs.appendFile('cards.txt', newHTML, function (err) {
             if (err) throw err;
             console.log('Saved!');
           });
@@ -215,7 +216,14 @@ function addCards(team){
 function createHTML() {
     const htmlPath = path.join(__dirname, "src", "html-templates", "template.html");
     const layout = fs.readFileSync(htmlPath, "utf-8");
-    const newHTML = htmlHelpers.injectCode(layout, '{{ code_injection }}', 'cards.html');
-    fs.writeFile("index.html", newHTML, (err) =>
-        err ? console.log(err) : console.log('Success!'))
+    const cardsPath = path.join(__dirname, 'cards.txt')
+    console.log(cardsPath)
+    setTimeout(() =>{
+        const cards = fs.readFileSync(cardsPath, "utf-8");
+        console.log(cards)
+        const newHTML = htmlHelpers.injectCode(layout, '{{ code_injection }}', cards);
+        fs.writeFile("index.html", newHTML, (err) =>
+            err ? console.log(err) : console.log('Success!'))
+        
+        }, 3000);
 }
