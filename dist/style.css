@@ -12,6 +12,17 @@ h1{
     
 }
 
+ul{
+    list-style-type: none;
+    padding: 0px;
+ }
+
+ li {
+     border: 0.5px solid rgba(0,0,0,.125);
+     /* border-radius: 5px; */
+   
+ }
+
 .card-header{
     background-color: aliceblue;
 }

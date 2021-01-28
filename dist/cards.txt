@@ -1,0 +1,21 @@
+
+<div class="col-3">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">willly </h4>
+            <h6 class="card-subtitle mb-2 text-muted">Manager</h6>
+        </div>
+
+        <div class="card-body">
+            <div class="card-text">
+                <ul>
+                    <li>ID: boy</li>
+                    <li>Email: <a href = "mailto: ehe\\">ehe\\</a></li>
+                    <li>Office: eee</li>
+                </ul>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>

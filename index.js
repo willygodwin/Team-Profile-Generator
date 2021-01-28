@@ -56,7 +56,7 @@ promptQuestions(htmlHelpers.managerQuestions)
 // ask question specific to emmployee type
 // ;
 function addCards(team){
-    fs.writeFile("cards.txt", '', (err) =>
+    fs.writeFile(`${__dirname}/dist/cards.txt`, '', (err) =>
         err ? console.log(err) : console.log('Success!'))
     for (const objClass of team) {
         const htmlPath = path.join(__dirname, "src", "html-templates", "card.html");
@@ -83,7 +83,7 @@ function addCards(team){
 
         }
 
-        fs.appendFile('cards.txt', newHTML, function (err) {
+        fs.appendFile(`${__dirname}/dist/cards.txt`, newHTML, function (err) {
             if (err) throw err;
             console.log('Saved!');
           });
@@ -91,17 +91,34 @@ function addCards(team){
     }
 }
 
+// function createHTML() {
+//     const htmlPath = path.join(__dirname, "src", "html-templates", "template.html");
+//     const layout = fs.readFileSync(htmlPath, "utf-8");
+//     const cardsPath = path.join(__dirname, 'cards.txt')
+//     console.log(cardsPath)
+//     setTimeout(() =>{
+//         const cards = fs.readFileSync(cardsPath, "utf-8");
+//         console.log(cards)
+//         const newHTML = htmlHelpers.injectCode(layout, '{{ code_injection }}', cards);
+//         fs.writeFile(`${__dirname}/dist/index.html`, newHTML, (err) =>
+//             err ? console.log(err) : console.log('Success!'))
+        
+//         }, 3000);
+// }
+
 function createHTML() {
     const htmlPath = path.join(__dirname, "src", "html-templates", "template.html");
-    const layout = fs.readFileSync(htmlPath, "utf-8");
-    const cardsPath = path.join(__dirname, 'cards.txt')
-    console.log(cardsPath)
-    setTimeout(() =>{
-        const cards = fs.readFileSync(cardsPath, "utf-8");
-        console.log(cards)
-        const newHTML = htmlHelpers.injectCode(layout, '{{ code_injection }}', cards);
-        fs.writeFile("index.html", newHTML, (err) =>
-            err ? console.log(err) : console.log('Success!'))
+    fs.readFile(htmlPath, "utf-8", (err, data) => {
+        if (err) throw err;
+        const layout = data
         
-        }, 3000);
+        const cardsPath = path.join(__dirname, 'dist','cards.txt')
+        fs.readFile(cardsPath, "utf-8", (err, data) => {
+            if (err) throw err;
+            
+            const newHTML = htmlHelpers.injectCode(layout, '{{ code_injection }}', data)
+            fs.writeFile(`${__dirname}/dist/index.html`, newHTML, (err) =>
+            err ? console.log(err) : console.log('Success!'))
+        })
+    });
 }
