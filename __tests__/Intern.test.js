@@ -17,11 +17,11 @@ describe("Intern", () => {
         it("should test the getters of manager", () => {
             const intern = new Intern("Sarah", "sarah@gmail.com", 1, "UWA");
     
-            expect(intern.getName).toEqual("Sarah");
-            expect(intern.getEmail).toEqual("sarah@gmail.com");
-            expect(intern.getID).toEqual(1);
-            expect(intern.getSchool).toEqual('UWA');
-            expect(intern.getRole).toEqual("Intern");
+            expect(intern.getName()).toEqual("Sarah");
+            expect(intern.getEmail()).toEqual("sarah@gmail.com");
+            expect(intern.getID()).toEqual(1);
+            expect(intern.getSchool()).toEqual('UWA');
+            expect(intern.getRole()).toEqual("Intern");
         });
     });
 });

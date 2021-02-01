@@ -19,11 +19,11 @@ describe("Engineer", () => {
         it("should test the getters of Engineer", () => {
             const engineer = new Engineer("Sarah", "sarah@gmail.com", 1, "SarahsGithub");
     
-            expect(engineer.getName).toEqual("Sarah");
-            expect(engineer.getEmail).toEqual("sarah@gmail.com");
-            expect(engineer.getID).toEqual(1);
-            expect(engineer.getGithub).toEqual("SarahsGithub");
-            expect(engineer.getRole).toEqual("Engineer");
+            expect(engineer.getName()).toEqual("Sarah");
+            expect(engineer.getEmail()).toEqual("sarah@gmail.com");
+            expect(engineer.getID()).toEqual(1);
+            expect(engineer.getGithub()).toEqual("SarahsGithub");
+            expect(engineer.getRole()).toEqual("Engineer");
         });
     });
 });

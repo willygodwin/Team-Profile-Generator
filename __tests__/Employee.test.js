@@ -39,7 +39,7 @@ describe("Employee", () => {
         // });
 
         // it("should throw an error if 'email' is not a string", () => {
-        // const cb = () => new Child("Sarah", true, 1);
+        // const cb = () => new Employee("Sarah", true, 1);
         // const err = new Error("Expected parameter 'email' to be a non-empty string");;
     
         // expect(cb).toThrowError(err);
@@ -48,9 +48,9 @@ describe("Employee", () => {
         it("should test the getters of employee", () => {
             const employee = new Employee("Sarah", "sarah@gmail.com", 1);
     
-            expect(employee.getName).toEqual("Sarah");
-            expect(employee.getEmail).toEqual("sarah@gmail.com");
-            expect(employee.getID).toEqual(1);
+            expect(employee.getName()).toEqual("Sarah");
+            expect(employee.getEmail()).toEqual("sarah@gmail.com");
+            expect(employee.getID()).toEqual(1);
             });
      
     });
