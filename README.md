@@ -19,15 +19,15 @@ Team Profile Generator uses inquirer to ask the user questions about their proje
 ## Installation Instructions
 To install ensure that in the integrated terminal you have run 'npm init -y' to initialise the JSON package, then run 'npm install inquirer'. If you have previously run the above commands, run 'npm install' install to ensure the dependencies are up to date. 
 
-![Alt text](/screenshots/init.JPG?raw=true "init") 
+![Alt text](/src/screenshots/init.JPG?raw=true "init") 
 
-![Alt text](/screenshots/install.JPG?raw=true "install")
+![Alt text](/src/screenshots/install.JPG?raw=true "install")
 
 
 ## Usage Information 
 To use the application in the integrated terminal run 'node .\index.js' and follow the command prompts. 
 
-![Alt text](/screenshots/run.JPG?raw=true "run")
+![Alt text](/src/screenshots/run.JPG?raw=true "run")
 
 Your generated HTML should apper in the file /dist.
 
